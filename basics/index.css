@@ -1,0 +1,28 @@
+body
+{
+	background-color: rgb(252, 154, 82);
+}
+
+h1
+{
+	color: blue;
+}
+
+#middle_scroll
+{
+	/* background-color: white;; */
+	position: relative;
+	left: 30vmax;
+	width: 40vmax;
+	height: 12vmax;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+}
+
+#middle_scroll #img_1,#img_2,#img_3
+{
+	width: 10vmax;
+	height: 10vmax;
+}
