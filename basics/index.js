@@ -34,13 +34,34 @@ var width = {
 
 function	focus_img(i)
 {
-	for (var j = 0; j < one.children.length; j++)
-	{
-		one.children[j].style.width = width.low + "vmax";
-		one.children[j].style.height = width.low + "vmax";
-	}
-	one.children[i].style.width = width.high + "vmax";
-	one.children[i].style.height = width.high + "vmax";
+	var count_out = width.init;
+	var fade_out = setInterval(function (){
+		for (var j = 0; j < one.children.length; j++)
+		{
+			if (j !== i)
+			{
+				if (one.children[j].style.width !== "8vmax")
+				{
+					one.children[j].style.width = count_out + "vmax";
+					one.children[j].style.height = count_out + "vmax";
+					count_out -= 0.1;
+				}
+				if (count_out < width.low)
+					clearInterval(fade_out);
+			}
+		}
+	}, 10);//		time
+	var count_in = width.init;
+	var fade_in = setInterval(function (){
+		if (one.children[i].style.width !== "12vmax")
+		{
+			one.children[i].style.width = count_in + "vmax";
+			one.children[i].style.height= count_in + "vmax";
+			count_in += 0.1;
+		}
+		if (count_in > width.high)
+			clearInterval(fade_in);
+	}, 10);//		time
 }
 
 function	launch_focus_f(i)
@@ -53,25 +74,24 @@ function	launch_focus_f(i)
 };
 
 
+function	yolo()
+{
+	console.log("YOLO");
+}
 
 function	reset_img()
 {
-	for (var j = 0; j < one.children.length; j++)
-	{
-		one.children[j].style.width = width.init + "vmax";
-		one.children[j].style.height = width.init + "vmax";
-	}
+	// for (var j = 0; j < one.children.length; j++)
+	// {
+	// 	one.children[j].style.width = width.init + "vmax";
+	// 	one.children[j].style.height = width.init + "vmax";
+	// }
+	yolo();
 }
 
-function	yolo()
-{
-	alert('yolo');
-}
 
 	var i;
 	for (i = 0; i < one.children.length; i++)
-	{
-		// one.children[i].onclick = launch_focus_f(i);
 		one.children[i].addEventListener("mouseover", launch_focus_f(i), true);
-	}
-	window.addEventListener("mouseover", reset_img, true);
+	one.addEventListener("mouseover", reset_img(), false);
+	// window.addEventListener("mouseover", reset_img, true);
